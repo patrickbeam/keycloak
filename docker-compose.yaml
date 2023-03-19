@@ -1,0 +1,9 @@
+version: "3"
+services:
+  keycloak1:
+    image: ghcr.io/patrickbeam/keycloak-19.0.2:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
