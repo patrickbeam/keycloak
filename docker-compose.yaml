@@ -2,7 +2,7 @@ version: "3"
 services:
   keycloak1:
     image: ghcr.io/patrickbeam/keycloak-19.0.2:latest
-    command: ["start"]
+    command: ["start", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin"]
     ports:
       - "80:8080"
     environment:
@@ -12,11 +12,16 @@ services:
       - KC_CACHE=ispn
       - JAVA_OPTS_APPEND=-Djgroups.dns.query=headless-keycloak
       - kc_hostname_url=http://keycloak.cloudmast.io
+      - KC_DB_URL_HOST=postgres
+      - kc_db_username=admin
+      - kc_db_password=admin
+      - KC_DB_URL_PORT=5432
+      - kc_url_db_database=postgres
     networks:
       - keycloak
   keycloak2:
     image: ghcr.io/patrickbeam/keycloak-19.0.2:latest
-    command: ["start"]
+    command: ["start", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin"]
     ports:
       - "81:8080"
     environment:
@@ -26,6 +31,21 @@ services:
       - KC_CACHE=ispn
       - JAVA_OPTS_APPEND=-Djgroups.dns.query=headless-keycloak
       - kc_hostname_url=http://keycloak2.cloudmast.io:81
+      - KC_DB_URL_HOST=postgres
+      - kc_db_username=admin
+      - kc_db_password=admin
+      - KC_DB_URL_PORT=5432
+      - kc_url_db_database=postgres
+    networks:
+      - keycloak
+  postgres:
+    image: postgres:10.21
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=keycloak
     networks:
       - keycloak
 networks:
