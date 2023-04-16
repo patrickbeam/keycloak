@@ -14,5 +14,7 @@ RUN cd ~/ && curl -L https://github.com/keycloak/keycloak/releases/download/19.0
 RUN cd ~/ && tar -xzf ~/keycloak.tar.gz --strip-components=1
 RUN rm ~/keycloak.tar.gz
 
+COPY *.jar /home/keycloak/providers
+
 WORKDIR /home/keycloak
 ENTRYPOINT ["bin/kc.sh"]
