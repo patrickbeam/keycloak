@@ -17,5 +17,5 @@ RUN rm ~/keycloak.tar.gz
 COPY *.jar /home/keycloak/providers
 
 WORKDIR /home/keycloak
-RUN bin/kc.sh build --cache-stack=ec2
+RUN bin/kc.sh build --cache-stack=ec2 --cache=ispn
 ENTRYPOINT ["bin/kc.sh"]

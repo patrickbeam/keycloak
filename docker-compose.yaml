@@ -2,7 +2,7 @@ version: "3"
 services:
   keycloak1:
     image: ghcr.io/patrickbeam/keycloak-19.0.2:latest
-    command: ["start", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin"]
+    command: ["start", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin", "--debug"]
     ports:
       - "80:8080"
     environment:
@@ -10,7 +10,8 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_PROXY=edge
       - KC_CACHE=ispn
-      - JAVA_OPTS_APPEND=-Djgroups.dns.query=headless-keycloak
+      - KC_CACHE_STACK=ec2
+      - JAVA_OPTS_APPEND=-'Djgroups.dns.query=headless-keycloak -Djgroups.s3.bucket_name=velo-keycloak-inifinispan -Djgroups.s3.region_name=us-east-2 -Djgroups.s3.access_key=AKIAQGBAL77ZKNQHGFJN -Djgroups.s3.secret_access_key=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'
       - kc_hostname_url=http://keycloak.cloudmast.io
       - KC_DB_URL_HOST=postgres
       - kc_db_username=admin
@@ -21,15 +22,16 @@ services:
       - keycloak
   keycloak2:
     image: ghcr.io/patrickbeam/keycloak-19.0.2:latest
-    command: ["start", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin"]
+    command: ["start", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin", "--debug"]
     ports:
       - "81:8080"
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_PROXY=edge
+      - JAVA_OPTS_APPEND=-'Djgroups.dns.query=headless-keycloak -Djgroups.s3.bucket_name=velo-keycloak-inifinispan -Djgroups.s3.region_name=us-east-2 -Djgroups.s3.access_key=AKIAQGBAL77ZKNQHGFJN -Djgroups.s3.secret_access_key=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'
+      - kc_hostname_url=http://keycloak.cloudmast.io
       - KC_CACHE=ispn
-      - JAVA_OPTS_APPEND=-Djgroups.dns.query=headless-keycloak
       - kc_hostname_url=http://keycloak2.cloudmast.io:81
       - KC_DB_URL_HOST=postgres
       - kc_db_username=admin
