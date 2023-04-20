@@ -10,7 +10,7 @@ RUN apk add curl openjdk11 bash
 
 # Download and install keycloak to /home/keycloak.  Run Keycloak as the Keycloak user.
 USER keycloak
-RUN cd ~/ && curl -L https://github.com/keycloak/keycloak/releases/download/20.0.3/keycloak-20.0.3.tar.gz -o ~/keycloak.tar.gz
+RUN cd ~/ && curl -L https://github.com/keycloak/keycloak/releases/download/21.0.2/keycloak-21.0.2.tar.gz -o ~/keycloak.tar.gz
 RUN cd ~/ && tar -xzf ~/keycloak.tar.gz --strip-components=1
 RUN rm ~/keycloak.tar.gz
 
