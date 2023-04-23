@@ -15,6 +15,7 @@ RUN cd ~/ && tar -xzf ~/keycloak.tar.gz --strip-components=1
 RUN rm ~/keycloak.tar.gz
 
 COPY *.jar /home/keycloak/providers
+COPY custom-jgroups-ec2.xml /home/keyloak/conf 
 
 WORKDIR /home/keycloak
 RUN bin/kc.sh build --cache-stack=ec2
