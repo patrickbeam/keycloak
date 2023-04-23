@@ -14,8 +14,9 @@ RUN cd ~/ && curl -L https://github.com/keycloak/keycloak/releases/download/21.0
 RUN cd ~/ && tar -xzf ~/keycloak.tar.gz --strip-components=1
 RUN rm ~/keycloak.tar.gz
 
+RUN mkdir /home/keycloak/default-configs
 COPY *.jar /home/keycloak/providers
-COPY custom-jgroups-ec2.xml /home/keyloak/conf 
+COPY default-jgroups-ec2.xml /home/keyloak/default-configs
 
 WORKDIR /home/keycloak
 RUN bin/kc.sh build --cache-stack=ec2
