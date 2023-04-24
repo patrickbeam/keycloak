@@ -16,7 +16,7 @@ RUN rm ~/keycloak.tar.gz
 
 RUN mkdir /home/keycloak/default-configs
 COPY *.jar /home/keycloak/providers
-COPY default-jgroups-ec2.xml /home/keyloak/default-configs
+COPY default-jgroups-ec2.xml /home/keycloak/default-configs
 
 WORKDIR /home/keycloak
 RUN bin/kc.sh build --cache-stack=ec2
