@@ -1,7 +1,7 @@
 version: "3"
 services:
   keycloak1:
-    image: keycloak-19.0.2
+    build: .
     command: ["start-dev", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin", "--debug"]
     ports:
       - "80:8080"
@@ -23,7 +23,7 @@ services:
     networks:
       - keycloak
   keycloak2:
-    image: keycloak-19.0.2
+    build: .
     command: ["start-dev", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin", "--debug"]
     ports:
       - "81:8080"
