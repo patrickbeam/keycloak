@@ -10,12 +10,12 @@ RUN adduser keycloak -D \
 USER keycloak
 WORKDIR /home/keycloak
 
-RUN cd ~/ && curl -L https://github.com/keycloak/keycloak/releases/download/21.0.2/keycloak-21.0.2.tar.gz -o ~/keycloak.tar.gz \
-    && cd ~/ && tar -xzf ~/keycloak.tar.gz --strip-components=1 \
-    && rm ~/keycloak.tar.gz \
+RUN curl -sSL https://github.com/keycloak/keycloak/releases/download/21.0.2/keycloak-21.0.2.tar.gz -o ./keycloak.tar.gz \
+    && tar -xzf ./keycloak.tar.gz --strip-components=1 \
+    && rm ./keycloak.tar.gz \
     && mkdir ./default-configs
 
-COPY *.jar ./providers
+COPY jars/*.jar ./providers
 COPY default-jgroups-ec2.xml ./default-configs
 
 RUN bin/kc.sh build --cache-stack=ec2
