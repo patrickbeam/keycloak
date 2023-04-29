@@ -10,7 +10,7 @@
          thread_pool.keep_alive_time="5000"/>
 
     <aws.S3_PING region_name="us-east-2"
-                 bucket_name="velo-keycloak-infinspan"
+                 bucket_name="imagine-keycloak-infinispan"
                  bucket_prefix="jgroups"/>
 
     <MERGE3 min_interval="10000"
