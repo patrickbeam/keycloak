@@ -16,5 +16,4 @@ RUN curl -sSL https://github.com/keycloak/keycloak/releases/download/21.0.2/keyc
 
 COPY jars/*.jar ./providers
 
-RUN bin/kc.sh build --cache-stack=ec2
 ENTRYPOINT ["bin/kc.sh"]
