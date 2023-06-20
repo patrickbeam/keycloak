@@ -4,7 +4,7 @@ FROM alpine:3.17
 RUN adduser keycloak -D \
     && apk update \ 
     && apk upgrade libssl3 libcrypto3 \
-    && apk add --no-cache curl=8.0.1-r0 openjdk11=11.0.19_p7-r0 bash=5.2.15-r0
+    && apk add --no-cache curl=8.1.2-r0 openjdk11=11.0.19_p7-r0 bash=5.2.15-r0
 
 # Download and install keycloak to /home/keycloak.  Run Keycloak as the Keycloak user.
 USER keycloak
