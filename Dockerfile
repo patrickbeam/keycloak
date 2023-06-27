@@ -15,12 +15,12 @@ RUN curl -sSL https://github.com/keycloak/keycloak/releases/download/21.0.2/keyc
     && rm ./keycloak.tar.gz 
 
 COPY jars/*.jar ./providers
-COPY cache-ispn-database.xml ./conf
+#COPY cache-ispn-database.xml ./conf
 
-USER root
-RUN chown keycloak:keycloak /home/keycloak/conf/cache-ispn-database.xml \
-    && chmod 644 /home/keycloak/conf/cache-ispn-database.xml
-
-USER keycloak
+#USER root
+#RUN chown keycloak:keycloak /home/keycloak/conf/cache-ispn-database.xml \
+#    && chmod 644 /home/keycloak/conf/cache-ispn-database.xml
+#
+#USER keycloak
 
 ENTRYPOINT ["bin/kc.sh"]
