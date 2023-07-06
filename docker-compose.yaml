@@ -2,58 +2,56 @@ version: "3"
 services:
   keycloak1:
     build: .
-    command: ["start-dev", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin", "--debug"]
+    command:
+      [
+        "--verbose",
+        "start",
+        "--db postgres",
+        "--db-url-host Your DB host name here",
+        "--db-username username",
+        "--db-password password",
+        "-Dkeycloak.infinispan.ignoreSkipCacheStore=true"
+      ]
     ports:
       - "80:8080"
     environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_PROXY=edge
       - KC_CACHE=ispn
-      - KC_CACHE_STACK=ec2
       - JAVA_OPTS_APPEND='-Djgroups.dns.query=headless-keycloak'
-      - AWS_ACCESS_KEY_ID=
-      - AWS_SECRET_ACCESS_KEY=
-      - kc_hostname_url=http://keycloak.cloudmast.io
-      - KC_DB_URL_HOST=postgres
-      - kc_db_username=admin
-      - kc_db_password=admin
-      - KC_DB_URL_PORT=5432
-      - kc_url_db_database=postgres
+      - kc_hostname_url=
     networks:
       - keycloak
   keycloak2:
     build: .
-    command: ["start-dev", "--db postgres", "--db-url-host postgres", "--db-username admin", "--db-password admin", "--debug"]
+    command:
+      [
+        "--verbose",
+        "start",
+        "--db postgres",
+        "--db-url-host Your DB host name here",
+        "--db-username username",
+        "--db-password password",
+        "-Dkeycloak.infinispan.ignoreSkipCacheStore=true"
+      ]
     ports:
       - "81:8080"
     environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_PROXY=edge
       - JAVA_OPTS_APPEND='-Djgroups.dns.query=headless-keycloak'
-      - AWS_ACCESS_KEY_ID=
-      - AWS_SECRET_ACCESS_KEY=
-      - kc_hostname_url=http://keycloak.cloudmast.io
+      - kc_hostname_url=
       - KC_CACHE=ispn
-      - KC_CACHE_STACK=ec2
-      - kc_hostname_url=http://keycloak2.cloudmast.io:81
-      - KC_DB_URL_HOST=postgres
-      - kc_db_username=admin
-      - kc_db_password=admin
-      - KC_DB_URL_PORT=5432
-      - kc_url_db_database=postgres
-    networks:
-      - keycloak
-  postgres:
-    image: postgres:10.21
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=keycloak
+      - kc_hostname_url=
     networks:
       - keycloak
 networks:
   keycloak:
+    postgres:
+      image: postgres:10.21
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=admin
+        - POSTGRES_DB=keycloak
+      networks:
+        - keycloak

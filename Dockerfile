@@ -17,6 +17,8 @@ RUN curl -sSL https://github.com/keycloak/keycloak/releases/download/21.0.2/keyc
 COPY jars/*.jar ./providers
 #COPY cache-ispn-database.xml ./conf
 
+#This block is an example of how to use your own cache configuration file.
+#If you are setting environment variables in your docker compose file you can leave this commented out.
 #USER root
 #RUN chown keycloak:keycloak /home/keycloak/conf/cache-ispn-database.xml \
 #    && chmod 644 /home/keycloak/conf/cache-ispn-database.xml
