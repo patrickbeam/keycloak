@@ -10,7 +10,7 @@ RUN adduser keycloak -D \
 USER keycloak
 WORKDIR /home/keycloak
 
-RUN curl -sSL https://github.com/keycloak/keycloak/releases/download/21.0.2/keycloak-21.0.2.tar.gz -o ./keycloak.tar.gz \
+RUN curl -sSL https://github.com/keycloak/keycloak/releases/download/19.0.3/keycloak-19.0.3.tar.gz -o ./keycloak.tar.gz \
     && tar -xzf ./keycloak.tar.gz --strip-components=1 \
     && rm ./keycloak.tar.gz 
 
